@@ -6,12 +6,12 @@
 
 ```
 import VueScale from "vue-scale"
-<vue-scale v-model="value"/>
+<vue-scale />
 ```
 
 ### 演示
 
-[这是显示 demo》》](http://www.baidu.com)
+[暂无 demo 显示》》]("")
 
 注意：使用出错请检查组件宽度/高度，版本号。
 

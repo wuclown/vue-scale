@@ -1,0 +1,144 @@
+.mask {
+    content: "";
+    position: absolute;
+    top: 0px;
+    height: inherit;
+    width: 50%;
+    z-index: 99;
+    pointer-events: none;
+}
+.clown-scale {
+    position: relative;
+    background-color: #ffffff;
+    &.clown-scale-mask {
+        &::before {
+            .mask;
+            left: 0px;
+            background-image: linear-gradient(
+                to right,
+                white,
+                rgba(255, 255, 255, 0)
+            );
+        }
+        &::after {
+            .mask;
+            right: 0px;
+            background-image: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0),
+                white
+            );
+        }
+    }
+    > .standard {
+        position: relative;
+        > .standard-line {
+            position: absolute;
+            left: 0px;
+            top: -1px;
+            display: block;
+            margin-left: -6px;
+            z-index: 99;
+            border-top: 6px #ff9901 dashed;
+            border-left: 6px transparent dashed;
+            border-bottom: 6px transparent dashed;
+            border-right: 6px transparent solid;
+        }
+    }
+    > .clown-scale-swiper {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        height: inherit;
+        z-index: 1;
+        > .swiper {
+            height: inherit;
+            background-color: none;
+            transition-timing-function: cubic-bezier(0, 0.3, 0.8, 1);
+            margin: 0px;
+            padding: 0px;
+            > .placeholder {
+                display: inline-block;
+                height: inherit;
+            }
+            > .limb {
+                display: inline-block;
+                height: inherit;
+                background-image: url(./scale-h2.png);
+                background-repeat: no-repeat;
+                position: relative;
+                > .limb-number {
+                    position: absolute;
+                    bottom: 0px;
+                    font-style: normal;
+                    width: 100%;
+                    text-align: center;
+                    &.rotateX {
+                        transform: rotateX(180deg);
+                    }
+                }
+            }
+            > .first-li {
+                background-image: url(./scale-h1.png);
+            }
+        }
+    }
+    &.verticality {
+        &.clown-scale-mask {
+            &::before {
+                .mask;
+                top: 0px;
+                width: 100%;
+                height: 50%;
+                background-image: linear-gradient(
+                    to bottom,
+                    white,
+                    rgba(255, 255, 255, 0)
+                );
+            }
+            &::after {
+                .mask;
+                bottom: 0px;
+                width: 100%;
+                height: 50%;
+                top: auto;
+                background-image: linear-gradient(
+                    to top,
+                    white,
+                    rgba(255, 255, 255, 0)
+                );
+            }
+        }
+        > .standard {
+            > .standard-line {
+                margin-left: 0px;
+                border-top: 6px transparent dashed;
+                border-left: 6px #ff9901 dashed;
+            }
+        }
+        > .clown-scale-swiper {
+            > .swiper {
+                > .limb {
+                    background-image: url(./scale-v2.png);
+                    background-position: top left;
+                    display: block;
+                    > .limb-number {
+                        text-align: right;
+                        bottom: auto;
+                        &.rotateY {
+                            transform: rotateY(180deg);
+                            text-align: left;
+                        }
+                    }
+                }
+                > .first-li {
+                    background-image: url(./scale-v1.png);
+                    background-position: top left;
+                    > .limb-number {
+                        top: -12px !important;
+                    }
+                }
+            }
+        }
+    }
+}
