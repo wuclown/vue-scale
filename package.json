@@ -1,6 +1,6 @@
 {
     "name": "vue-scale",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "基于 better-scroll vue滑动刻度尺，他支持水平，垂直滑动。",
     "main": "component/index.js",
     "private": false,

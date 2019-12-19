@@ -10,6 +10,14 @@
 .clown-scale {
     position: relative;
     background-color: #ffffff;
+    &.horizontal {
+        width: 100%;
+        height: 60px;
+    }
+    &.verticality {
+        height: 100%;
+        width: 60px;
+    }
     &.clown-scale-mask {
         &::before {
             .mask;
@@ -71,7 +79,6 @@
                     position: absolute;
                     bottom: 0px;
                     font-style: normal;
-                    width: 100%;
                     text-align: center;
                     &.rotateX {
                         transform: rotateX(180deg);
@@ -125,6 +132,9 @@
                     > .limb-number {
                         text-align: right;
                         bottom: auto;
+                        right: 0px;
+                        display: flex;
+                        align-items: center;
                         &.rotateY {
                             transform: rotateY(180deg);
                             text-align: left;
@@ -136,6 +146,7 @@
                     background-position: top left;
                     > .limb-number {
                         top: -12px !important;
+                        align-items: flex-start;
                     }
                 }
             }

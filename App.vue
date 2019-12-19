@@ -1,8 +1,8 @@
 <!--
  * @Author: wyj
  * @Date: 2019-11-12 22:12:13
- * @LastEditors: wyj
- * @LastEditTime: 2019-12-02 22:27:38
+ * @LastEditors  : wyj
+ * @LastEditTime : 2019-12-18 22:45:28
  * @Description: 
  -->
 <template>
@@ -21,7 +21,6 @@ export default {
             value: 0
         }
     },
-    mounted() {},
-    methods: {}
+    mounted() {}
 }
 </script>

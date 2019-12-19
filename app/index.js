@@ -8,10 +8,6 @@ export default {
             type: String,
             default: "horizontal"
         },
-        color: {
-            type: String,
-            default: "#484848"
-        },
         // 当前刻度value
         value: {
             type: Number,
@@ -47,11 +43,17 @@ export default {
         // 遮罩
         mask: {
             type: Boolean,
-            default: true
+            default: false
+        },
+        // 刻度数格式
+        format: {
+            type: Function,
+            default: e => e
         }
     },
     data() {
         return {
+            list: [],
             scaleSize: 0,
             preventDefault: false,
             direction: true
@@ -59,6 +61,7 @@ export default {
     },
     created() {
         this.direction = this.type === "horizontal"
+        this.scaleList()
     },
     mounted() {
         const width = this.$refs.scale.clientWidth
@@ -93,11 +96,6 @@ export default {
         )
     },
     methods: {
-        setValue(val, time = 0) {
-            const x = this.direction ? this.calcScrollX(val) : 0
-            const y = this.direction ? 0 : this.calcScrollX(val)
-            this.bs.scrollTo(x, y, time)
-        },
         scroll(e) {
             const value = this.calcValue(e)
             this.$emit("input", value)
@@ -130,7 +128,6 @@ export default {
         scaleList() {
             const liWidth = this.interval * this.group
             const widthGroup = this.group * this.interval
-            const left = liWidth / 2 - this.interval
             const max = this.max / this.ratio / this.group
             const min = this.min / this.ratio / this.group
             const bsx = liWidth - this.interval + 1
@@ -143,7 +140,7 @@ export default {
                 const ifs = i === min
                 const width = ifs ? `${this.interval}px` : `${widthGroup}px`
                 const height = ifs ? `${this.interval}px` : `${widthGroup}px`
-                const leftX = ifs ? -String(this.min).length * 4 : left
+                const leftX = ifs ? -liWidth / 2 : liWidth / 2 - this.interval
                 const flipVertical = this.direction ? "rotateX" : "rotateY"
                 const item = (
                     <li
@@ -161,20 +158,23 @@ export default {
                                 this.flipVertical ? flipVertical : null
                             ]}
                             style={{
-                                color: this.color,
-                                left: `${this.direction ? leftX : 0}px`,
+                                width: `${this.direction ? liWidth : null}px`,
+                                height: `${this.direction ? null : liWidth}px`,
+                                left: `${this.direction ? leftX : null}px`,
                                 top: `${
-                                    this.direction ? null : leftX * 2 - 4
+                                    this.direction
+                                        ? null
+                                        : liWidth / 2 - this.interval
                                 }px`
                             }}
                         >
-                            {this.limbNumber(value)}
+                            {this.format(this.limbNumber(value))}
                         </i>
                     </li>
                 )
                 list.push(item)
             }
-            return list
+            this.list = list
         }
     },
     render() {
@@ -208,11 +208,10 @@ export default {
                 ]}
                 ref="scale"
                 style={{
-                    transform: this.flipVertical ? flipVertical : null,
-                    width: this.direction ? "100%" : "60px",
-                    height: this.direction ? "60px" : "100%"
+                    transform: this.flipVertical ? flipVertical : null
                 }}
             >
+                {this.value}
                 {this.$slots.standard ? (
                     this.$slots.standard
                 ) : (
@@ -236,7 +235,7 @@ export default {
                         }}
                     >
                         {placeholderLi}
-                        {this.scaleList()}
+                        {this.list}
                         {placeholderLi}
                     </ul>
                 </div>
