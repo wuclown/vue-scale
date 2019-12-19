@@ -4,9 +4,31 @@
 
 `npm i vue-scale -s`
 
+列一
 ```
 import VueScale from "vue-scale"
-<vue-scale />
+<VueScale v-model="value" />
+data{
+    return {
+        value: 60
+    }
+}
+```
+
+列二
+```
+import VueScale from "vue-scale"
+<VueScale v-model="value" :format="format" />
+data{
+    return {
+        value: 60
+    }
+}
+methods: {
+    format(e) {
+        return `${e}cm`
+    }
+}
 ```
 
 ### 演示
@@ -26,9 +48,13 @@ import VueScale from "vue-scale"
 | group        | 刻度尺刻度组                              | Number            | 10                      | -    |
 | flipVertical | 刻度尺刻水平/垂直翻转（与刻度尺类型关联） | Boolean           | false                   | -    |
 | mask         | 刻度尺刻遮罩 （与刻度尺类型关联）         | Boolean           | true                    | -    |
+| format       | 刻度尺数字格式化                            | Function(e) | -                       | -    |
+
+### EVENT
+| 参数         | 说明                                      | 类型              | 默认值                  | 版本 |
+| ------------ | ----------------------------------------- | ----------------- | ----------------------- | ---- |
 | scroll       | 当前滑动中回调                            | Function(value,e) | -                       | -    |
 | scrollEnd    | 当前滑动停止                              | Function(value,e) | -                       | -    |
-| setValue     | 动态设置滑动位置                          | Methods           | \$refs.xx.setValue(val) | -    |
 
 > 说明：  
 > 1、刻度尺组件 type="verticality"，请设置高度，默认 100%。  
