@@ -2,7 +2,7 @@
 
 这是一个基于 better-scroll 滑动刻度尺，他支持水平，垂直滑动。
 
-`npm i vue-scale -s`
+`npm i vue-scale -S`
 
 列一
 ```
